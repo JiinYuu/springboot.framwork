@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{book.list.title}"></title>
+</head>
+<body>
+	<h3 th:text="#{book.list.head.h3}"></h3>
+	<a th:href="@{/book/detail}" th:text="#{book.list.link.add}"></a>
+	<table border="1">
+		<tr>
+			<th th:text="#{book.list.th.no}">序号</th>
+			<th th:text="#{book.list.th.name}">书名</th>
+			<th th:text="#{book.list.th.price}">价格</th>
+			<th th:text="#{book.list.th.express}">出版方</th>
+			<th th:text="#{book.list.th.desc}">说明</th>
+			<th th:text="#{book.list.th.opration}">操作</th>
+		</tr>
+		<tr th:each="book, stat : ${entities}">
+			<td th:text="${stat.count}">1</td>
+			<td th:text="${book.name}">springboot实战</td>
+			<td th:text="${book.price}">22.3</td>
+			<td th:text="${book.express}">电子工业出版社</td>
+			<td th:text="${book.desc}">不错的一本书！</td>
+			<td>
+				<a th:href="@{/book/delete?id=} + ${book.id}" th:text="#{book.list.td.operation.delete}"></a>
+				<a th:href="@{/book/detail?id=} + ${book.id}" th:text="#{book.list.td.operation.update}"></a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
