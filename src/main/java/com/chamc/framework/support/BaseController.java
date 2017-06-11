@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -93,7 +94,7 @@ public abstract class BaseController<T extends BaseEntity> {
 		String preDelete = this.preDeleteListener.preDelete(model, entity);
 		if (!GO_ON.equals(preDelete))
 			return preDelete;
-		this.baseService().delete(entity);
+		this.baseService().delete(entity.getId());
 		String afterDelete = this.afterDeleteListener.afterDelete(model, entity);
 		if (!GO_ON.equals(afterDelete))
 			return afterDelete;
@@ -102,11 +103,12 @@ public abstract class BaseController<T extends BaseEntity> {
 
 	@RequestMapping("list")
 	public String query(Model model) {
-		String preQuery = this.preQueryListener.preQuery(model, new PageRequest(1, 5));
+		String preQuery = this.preQueryListener.preQuery(model, new PageRequest(0, 5));
 		if (!GO_ON.equals(preQuery))
 			return preQuery;
-		Page<T> result = this.baseService().findPage(new PageRequest(1, 5));
-		List<T> entities = this.baseService().findAll();
+		PageRequest page = new PageRequest(0, 5, new Sort("id"));
+		Page<T> result = this.baseService().findPage(page);
+		List<T> entities = result.getContent();
 		model.addAttribute("entities", entities);
 		String afterQuery = this.afterQueryListener.afterQuery(model, result);
 		if (!GO_ON.equals(afterQuery))

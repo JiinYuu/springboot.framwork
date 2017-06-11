@@ -15,18 +15,6 @@ public class BookController extends BaseController<Book> {
 	private BookService bookService;
 	
 	public BookController() {
-		/*this.setPreQueryListener((model, page) -> {
-			Long count = this.bookService.count();
-			if(count < 10) {
-				Book book = new Book();
-				book.setName("spring实战4.x");
-				book.setPrice(45.5F);
-				book.setExpress("人民邮电出版社");
-				book.setDesc("很好的一本书，值得一读！");
-				this.bookService.save(book);
-			}
-			return GO_ON;
-		});*/
 	}
 	
 	@Override

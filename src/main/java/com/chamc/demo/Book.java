@@ -1,8 +1,10 @@
 package com.chamc.demo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.chamc.framework.support.BaseEntity;
 
@@ -14,7 +16,12 @@ public class Book extends BaseEntity {
 	private String name;
 	private String express;
 	private Float price;
+	
+	@Column(name = "description")
 	private String desc;
+	
+	@ManyToOne
+	private Express exp;
 	
 	public String getName() {
 		return name;
@@ -55,6 +62,14 @@ public class Book extends BaseEntity {
 	@Override
 	public Long getId() {
 		return id;
+	}
+
+	public Express getExp() {
+		return exp;
+	}
+
+	public void setExp(Express exp) {
+		this.exp = exp;
 	}
 
 }

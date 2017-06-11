@@ -20,7 +20,7 @@
 			<td th:text="${stat.count}">1</td>
 			<td th:text="${book.name}">springboot实战</td>
 			<td th:text="${book.price}">22.3</td>
-			<td th:text="${book.express}">电子工业出版社</td>
+			<td th:text="${book.exp.name}">电子工业出版社</td>
 			<td th:text="${book.desc}">不错的一本书！</td>
 			<td>
 				<a th:href="@{/book/delete?id=} + ${book.id}" th:text="#{book.list.td.operation.delete}"></a>
